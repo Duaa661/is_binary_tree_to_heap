@@ -1,0 +1,42 @@
+class Solution {
+  public:
+  int count(Node* root){
+      if(!root){
+          return 0;
+      }
+      return 1+count(root->left)+count(root->right);
+  }
+  bool complete_binary_tree(Node* root,int index, int totalcount){
+      if(!root){
+          return 1;
+      }
+      if(index>=totalcount)
+          return 0;
+          return complete_binary_tree(root->left,2*index+1,totalcount)&&complete_binary_tree(root->right,2*index+2,totalcount);
+          
+  }
+  bool Max_heap(Node* root){
+       if(!root->left && !root->right){
+      return 1;
+      }
+      if(root->left){
+          if(root->left->data>root->data)
+          return 0;
+          if(!Max_heap(root->left))
+          return 0;
+      }
+      if(root->right){
+          if(root->right->data>root->data)
+          return 0;
+          return Max_heap(root->right);
+      }
+     
+  }
+    bool isHeap(struct Node* tree) {
+            int index=0;
+            int totalcount=count(tree);
+            if(!complete_binary_tree(tree,index,totalcount))
+            return 0;
+            return Max_heap(tree);
+    }
+};
